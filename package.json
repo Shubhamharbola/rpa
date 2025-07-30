@@ -1,0 +1,12 @@
+{
+  "name": "rpa-bot-monitoring",
+  "version": "1.0.0",
+  "description": "RPA Bot Monitoring System using React",
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

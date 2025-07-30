@@ -1,0 +1,12 @@
+/* Custom styles for the loader */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+body {
+  font-family: 'Arial', sans-serif;
+}
