@@ -3,25 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RPA Bot Monitoring System</title>
+  <title>RPA Bot Monitoring Dashboard</title>
   <!-- Tailwind CSS CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="./src/styles/tailwind.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-900 text-white">
   <div id="root"></div>
   <!-- React and ReactDOM -->
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.development.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <!-- Babel for JSX -->
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.20.15/babel.min.js"></script>
-  <!-- Component Scripts (order matters: dependencies first) -->
+  <!-- Chart.js for Metrics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <!-- Component Scripts (order matters) -->
   <script src="./src/components/Loader.jsx" type="text/babel"></script>
   <script src="./src/components/BotCard.jsx" type="text/babel"></script>
   <script src="./src/components/LogViewer.jsx" type="text/babel"></script>
+  <script src="./src/components/MetricsChart.jsx" type="text/babel"></script>
   <script src="./src/App.jsx" type="text/babel"></script>
   <script type="text/babel">
+    console.log('Starting render...');
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(React.createElement(window.App || 'div', null, 'Error: App component not found'));
   </script>
