@@ -1,4 +1,6 @@
+console.log('App.jsx loaded');
 const App = () => {
+  console.log('App.jsx rendering');
   const [bots, setBots] = React.useState([
     { id: 1, name: 'InvoiceBot', status: 'Scheduled', lastRun: '2025-07-31 18:30:00', nextRunSeconds: 300 },
     { id: 2, name: 'ScraperBot', status: 'Scheduled', lastRun: '2025-07-31 18:45:00', nextRunSeconds: 180 },
@@ -11,6 +13,13 @@ const App = () => {
     runs: [5, 3, 7],
     errors: [1, 0, 2],
   });
+
+  // Fake queue data
+  const queueTasks = [
+    { name: 'Process Invoices', priority: 'High', estimatedTime: '10 mins' },
+    { name: 'Update Database', priority: 'Medium', estimatedTime: '15 mins' },
+    { name: 'Generate Report', priority: 'Low', estimatedTime: '20 mins' },
+  ];
 
   // Update countdown timers every second
   React.useEffect(() => {
@@ -41,18 +50,19 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Update metrics every 10 seconds
+  // Update metrics every 30 seconds
   React.useEffect(() => {
     const interval = setInterval(() => {
       setMetrics({
         runs: [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)],
         errors: [Math.floor(Math.random() * 5), Math.floor(Math.random() * 5), Math.floor(Math.random() * 5)],
       });
-    }, 10000);
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
   const handleStart = (botId, botName) => {
+    console.log('Start clicked:', botId, botName);
     if (!botId || !botName) return;
     setLoadingBotId(botId);
     setTimeout(() => {
@@ -107,6 +117,7 @@ const App = () => {
   };
 
   const handleStop = (botId, botName) => {
+    console.log('Stop clicked:', botId, botName);
     if (!botId || !botName) return;
     setLoadingBotId(botId);
     setTimeout(() => {
@@ -182,6 +193,36 @@ const App = () => {
           })
         )
       ),
+      React.createElement('h2', { className: 'text-2xl font-semibold mb-4 text-gray-200' }, 'Queue Management'),
+      React.createElement(
+        'div',
+        { className: 'bg-gray-800 p-4 rounded-lg shadow-md mb-8' },
+        React.createElement('p', { className: 'text-lg text-gray-200 mb-2' }, '3 tasks remaining in queue'),
+        React.createElement(
+          'ul',
+          { className: 'space-y-2' },
+          queueTasks.map((task, index) =>
+            React.createElement(
+              'li',
+              {
+                key: index,
+                className: 'bg-gray-700 p-2 rounded flex justify-between items-center transition-all duration-300 hover:shadow-lg',
+              },
+              React.createElement('span', { className: 'text-gray-200' }, task.name),
+              React.createElement(
+                'div',
+                { className: 'flex space-x-4' },
+                React.createElement(
+                  'span',
+                  { className: `text-sm ${task.priority === 'High' ? 'text-red-400' : task.priority === 'Medium' ? 'text-yellow-400' : 'text-green-400'}` },
+                  `Priority: ${task.priority}`
+                ),
+                React.createElement('span', { className: 'text-sm text-gray-400' }, `Est. Time: ${task.estimatedTime}`)
+              )
+            )
+          )
+        )
+      ),
       React.createElement('h2', { className: 'text-2xl font-semibold mb-4 text-gray-200' }, 'Live Metrics'),
       React.createElement(window.MetricsChart, { metrics: metrics, botNames: bots.map((bot) => bot.name) }),
       React.createElement('h2', { className: 'text-2xl font-semibold mb-4 mt-8 text-gray-200' }, 'Activity Logs'),
@@ -191,3 +232,4 @@ const App = () => {
 };
 
 window.App = App;
+console.log('App.jsx assigned to window.App');

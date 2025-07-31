@@ -43,7 +43,7 @@ const MetricsChart = ({ metrics, botNames }) => {
           },
         },
         animation: {
-          duration: 1000,
+          duration: 0,
         },
         plugins: {
           legend: { labels: { color: '#d1d5db' } },
